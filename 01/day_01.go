@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	input, _ := os.ReadFile("./inputs/day_01/part1.txt")
+	input, _ := os.ReadFile("input.txt")
 	split := strings.Split(strings.TrimSpace(string(input)), "\n\n")
 	cals := make([]int, len(split))
 	for i, s := range split {
