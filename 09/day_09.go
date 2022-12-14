@@ -39,10 +39,8 @@ func updateTail(head Point, tail Point) Point {
 func main() {
 	input, _ := os.ReadFile("input.txt")
 	lines := strings.Split(strings.TrimSpace(string(input)), "\n")
-	head, tail := Point{x: 0, y: 0}, Point{x: 0, y: 0}
-	rope := make([]Point, 10)
-	partOne := map[Point]bool{head: true}
-	partTwo := map[Point]bool{head: true}
+	head, tail, rope := Point{x: 0, y: 0}, Point{x: 0, y: 0}, make([]Point, 10)
+	partOne, partTwo := map[Point]bool{head: true}, map[Point]bool{head: true}
 	for _, move := range lines {
 		m := strings.Split(move, " ")
 		steps, _ := strconv.Atoi(m[1])
