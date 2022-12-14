@@ -8,8 +8,7 @@ import (
 )
 
 type Point struct {
-	x int
-	y int
+	x, y int
 }
 
 func abs(i int) int {
@@ -43,13 +42,12 @@ func main() {
 	head, tail := Point{x: 0, y: 0}, Point{x: 0, y: 0}
 	rope := make([]Point, 10)
 	partOne := map[Point]bool{head: true}
-	partTwo := map[Point]bool{{x: 0, y: 0}: true}
+	partTwo := map[Point]bool{head: true}
 	for _, move := range lines {
-		i := strings.Split(move, " ")
-		direction := i[0]
-		steps, _ := strconv.Atoi(i[1])
+		m := strings.Split(move, " ")
+		steps, _ := strconv.Atoi(m[1])
 		for i := 0; i < steps; i++ {
-			switch direction {
+			switch m[0] {
 			case "R":
 				head.x++
 				rope[0].x++
@@ -63,16 +61,13 @@ func main() {
 				head.y++
 				rope[0].y++
 			}
-			//update part one short rope
 			tail = updateTail(head, tail)
-			//update part two long rope
 			for i := 1; i < len(rope); i++ {
 				rope[i] = updateTail(rope[i-1], rope[i])
 			}
 			partOne[tail] = true
-			partTwo[rope[9]] = true // tail
+			partTwo[rope[9]] = true
 		}
 	}
-	fmt.Println("partOne: ", len(partOne))
-	fmt.Println("partTwo: ", len(partTwo))
+	fmt.Println("partOne: ", len(partOne), "\npartTwo: ", len(partTwo))
 }
